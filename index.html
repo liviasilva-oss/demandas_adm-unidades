@@ -568,11 +568,8 @@ document.getElementById('saveBtn').addEventListener('click', ()=>{
   saveBtn.disabled = true;
   saveBtn.textContent = '⏳ Salvando…';
 
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify(faqData)
-  })
+  const saveUrl = SCRIPT_URL + '?action=save&payload=' + encodeURIComponent(JSON.stringify(faqData));
+  fetch(saveUrl, { method: 'GET' })
     .then(r => r.json())
     .then(res => {
       if(res.ok){
